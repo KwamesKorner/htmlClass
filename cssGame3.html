@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Drag and Drop HTML Game</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/css/lato-font.min.css" integrity="sha512-rSWTr6dChYCbhpHaT1hg2tf4re2jUxBWTuZbujxKg96+T87KQJriMzBzW5aqcb8jmzBhhNSx4XYGA6/Y+ok1vQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="css/style.css" rel="stylesheet">
+  <style>
+    /* CSS styles for the game elements */
+    .draggable {
+      width: 18%;
+      /* height: 3vh; */
+      background-color: #ccc;
+      margin-bottom: 1vh;
+      cursor: move;
+      border-radius: 5px;
+      padding-left: 2%;
+    }
+    .droppable {
+    /* width: 300px;
+    height: 200px; */
+    border: 2px solid #ccc;
+    }
+    .correct {
+    border-color: green;
+    }
+    .incorrect {
+    border-color: red;
+    }
+
+    /* Make the iframe responsive */
+    iframe {
+    width: 100%; /* Make the width of the iframe 100% to fill the entire container */
+    height: 85vh; /* Keep the height of the iframe at 85vh for better visibility */
+    display: inline-block; /* Display the iframe as an inline block element */
+    }
+
+    /* Add styles for the webpage*/
+    body {
+    font-family: 'Lato', sans-serif; /* Use Arial font for the body text */
+    background-color: #f1f1f1; /* Use a light gray background color for the body */
+    }
+
+    h1, h3 {
+      text-align: center;
+      font-family: 'Lato', sans-serif;
+    }
+
+    h1 {
+    color: #333; /* Use a dark gray text color for the h1 */
+    margin-top: 50px; /* Add a margin of 50px to the top of the h1 */
+    }
+
+    iframe {
+        margin: 0 auto !important;
+        width: 49vw !important;
+        height: 90vh !important;
+        display:inline-block !important;
+        padding-left: 5vw;
+        padding-right: 0;
+        -webkit-transform:scale(0.80);
+        -moz-transform:scale(0.80);
+        -ms-transform:scale(0.80);
+        transform:scale(0.80);
+        -ms-transform-origin:0 0;
+        -webkit-transform-origin:0 0;
+        -moz-transform-origin:0 0;
+        transform-origin:0 0;
+    }
+    input {
+      width: 18%;
+      border-radius: 5px;
+    }
+  </style>
+  <script>
+    // JavaScript code for making the elements draggable
+    function makeDraggable() {
+      var elements = document.getElementsByClassName("draggable");
+      for (var i = 0; i < elements.length; i++) {
+        elements[i].draggable = true;
+      }
+    }
+
+    // JavaScript code for handling the drag and drop events
+    function handleDragStart(event) {
+      event.dataTransfer.setData("text", event.target.id);
+    }
+    function handleDrop(event) {
+      event.preventDefault();
+      var data = event.dataTransfer.getData("text");
+      var element = document.getElementById(data);
+      var target = event.target;
+      while (target.className !== "droppable") {
+        target = target.parentNode;
+      }
+      var targetId = target.id;
+      if (element.dataset.target === targetId) {
+        target.value = element.innerHTML;
+        target.classList.add("correct");
+        element.parentNode.removeChild(element);
+        workingCss = document.getElementById("code");
+        tag = workingCss.querySelector("#"+targetId);
+        console.log(tag)
+        tag.replaceWith(element.innerHTML);
+        new_css = document.getElementById("code").innerHTML;
+        var iframe = document.getElementById("old-webpage");
+        var head = iframe.contentDocument.getElementsByTagName("head")[0];
+        var style = head.getElementsByTagName("style")[0];
+        style.innerHTML = new_css
+        console.log(style.innerHTML)
+
+      } else {
+        target.classList.add("incorrect");
+        setTimeout(function() {
+          target.classList.remove("incorrect");
+        }, 1000);
+      }
+      if(document.getElementsByClassName("draggable").length == 0){
+        var feedback = document.getElementById("feedback")
+        feedback.innerHTML("They Match!")
+      }
+    }
+    function handleDragOver(event) {
+      event.preventDefault();
+    }
+  </script>
+</head>
+<body onload="makeDraggable()">
+  <h1>Learn CSS</h1>
+
+  <h3>We're going to apply styles to turn the webpage on the left into the one on the right:</h3><br/>
+  <!-- <div class="row"> -->
+    <iframe id="old-webpage" srcdoc='
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <title>My First CSS Page</title>
+        <style></style>
+      </head>
+      <body>
+        <h1>My First CSS Page</h1>
+        <p>Welcome to my first CSS page!</p>
+        <img src="https://hatrabbits.com/wp-content/uploads/2017/01/random.jpg" alt="A sample image">
+        <p>In this page, I am using CSS to style my HTML elements.</p>
+      </body>
+    </html>'></iframe>
+    <iframe id="new-webpage" srcdoc='
+    <!DOCTYPE html>
+    <html>
+      <head>
+            <title>My Webpage</title>
+            <style>
+                body {
+                    background-color: lightgray;
+                    font-size: 22px;
+                    color: black;
+                  }
+                  
+                  h1 {
+                    font-size: 36px;
+                    color: blue;
+                    text-align: center;
+                    margin-top: 50px;
+                  }
+                  
+                  p {
+                    color: green;
+                    padding: 20px;
+                    text-align: justify;
+                  }
+                  
+                  img {
+                    width: 300px;
+                    height: 200px;
+                    border: 5px solid gray;
+                    margin: 20px auto;
+                    display: block;
+                  }                  
+            </style>
+        </head>
+        <body>
+          <h1>My First CSS Page</h1>
+          <p>Welcome to my first CSS page!</p>
+          <img src="https://hatrabbits.com/wp-content/uploads/2017/01/random.jpg" alt="A sample image">
+          <p>In this page, I am using CSS to style my HTML elements.</p>
+        </body>
+      </html>
+        '></iframe>
+  </div>
+  <!-- <object data='basic-webpage.html' ></object> -->
+  <!-- <object data='basic-webpage-with-css.html' ></object><br/> -->
+
+  <h3>How Should Our CSS File Look?</h3><br/>
+
+
+  <div class="row">
+    <div class="col-md">
+    <pre>
+        <code id="code">
+            body {
+                background-color: <input type="text" id="lightgray" class="droppable" ondrop="handleDrop(event)" ondragover="handleDragOver(event)" readonly>;
+                font-size: <input type="text" id="p-22" class="droppable" ondrop="handleDrop(event)" ondragover="handleDragOver(event)" readonly>;
+              }
+              
+              h1 {
+                font-size: <input type="text" id="p-36" class="droppable" ondrop="handleDrop(event)" ondragover="handleDragOver(event)" readonly>;
+                color: <input type="text" id="blue" class="droppable" ondrop="handleDrop(event)" ondragover="handleDragOver(event)" readonly>;
+                text-align: <input type="text" id="center" class="droppable" ondrop="handleDrop(event)" ondragover="handleDragOver(event)" readonly>;
+                margin-top: <input type="text" id="m-50" class="droppable" ondrop="handleDrop(event)" ondragover="handleDragOver(event)" readonly>;
+              }
+              
+              p {
+                color: <input type="text" id="green" class="droppable" ondrop="handleDrop(event)" ondragover="handleDragOver(event)" readonly>;
+                padding: <input type="text" id="padding-20" class="droppable" ondrop="handleDrop(event)" ondragover="handleDragOver(event)" readonly>;
+                text-align: <input type="text" id="justify" class="droppable" ondrop="handleDrop(event)" ondragover="handleDragOver(event)" readonly>;
+              }
+              
+              img {
+                width: <input type="text" id="w-300" class="droppable" ondrop="handleDrop(event)" ondragover="handleDragOver(event)" readonly>;
+                height: <input type="text" id="h-200" class="droppable" ondrop="handleDrop(event)" ondragover="handleDragOver(event)" readonly>;
+                border: <input type="text" id="px-5-solid-gray" class="droppable" ondrop="handleDrop(event)" ondragover="handleDragOver(event)" readonly>;
+                margin: <input type="text" id="px-20-auto" class="droppable" ondrop="handleDrop(event)" ondragover="handleDragOver(event)" readonly>;
+                display: <input type="text" id="block" class="droppable" ondrop="handleDrop(event)" ondragover="handleDragOver(event)" readonly>;
+              }              
+        </code>
+    </pre>
+    </div>
+    <div class="col-md">
+        <div id="lightgray-value" class="draggable" data-target="lightgray" ondragstart="handleDragStart(event)">lightgray</div>
+        <div id="22-value" class="draggable" data-target="p-22" ondragstart="handleDragStart(event)">22px</div>
+        <div id="blue-value" class="draggable" data-target="blue" ondragstart="handleDragStart(event)">blue</div>
+        <div id="36-value" class="draggable" data-target="p-36" ondragstart="handleDragStart(event)">36px</div>
+        <div id="20-padding-value" class="draggable" data-target="padding-20" ondragstart="handleDragStart(event)">20px</div>
+        <div id="300-value" class="draggable" data-target="w-300" ondragstart="handleDragStart(event)">300px</div>
+        <div id="200-value" class="draggable" data-target="h-200" ondragstart="handleDragStart(event)">200px</div>
+        <div id="5-px-solid-gray-value" class="draggable" data-target="px-5-solid-gray" ondragstart="handleDragStart(event)">5px solid gray</div>
+        <div id="20-px-auto-value" class="draggable" data-target="px-20-auto" ondragstart="handleDragStart(event)">20px auto</div>
+        <div id="center-value" class="draggable" data-target="center" ondragstart="handleDragStart(event)">center</div>
+        <div id="50-value" class="draggable" data-target="m-50" ondragstart="handleDragStart(event)">50px</div>
+        <div id="justify-value" class="draggable" data-target="justify" ondragstart="handleDragStart(event)">justify</div>
+        <div id="green-value" class="draggable" data-target="green" ondragstart="handleDragStart(event)">green</div>
+        <div id="block-value" class="draggable" data-target="block" ondragstart="handleDragStart(event)">block</div>
+    </div>
+</body>
+</html>
