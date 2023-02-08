@@ -54,7 +54,7 @@
     iframe {
         margin: 0 auto !important;
         width: 49vw !important;
-        height: 40vh !important;
+        height: 80vh !important;
         display:inline-block !important;
         padding-left: 5vw;
         padding-right: 0;
@@ -146,6 +146,7 @@
     </div>
     <div>
         <p>Here is some content on my website.</p>
+        <img src="https://cdn.shopify.com/s/files/1/2081/1519/products/E-TYPE_1_Black.jpg?v=1671410539"/>
     </div>
     <div>
         <p>Copyright &copy; 2023 My Name</p>
@@ -158,30 +159,39 @@
     <head>
     <title>Styled Divs Example</title>
     <style>
-        #header {
-        background-color: blue;
+        #section {
+        background-color: lightblue;
         padding: 10px;
         text-align: center;
+        color: brown;
         }
-        #main {
-        background-color: yellow;
+        img {
+            height: 250px;
+            width: 400px;
+        }
+        .content {
+        background-color: lightgray;
         padding: 20px;
+        text-align: center;
+        font-family: sans-serif;
         }
-        #footer {
-        background-color: green;
+        #portion {
+        background-color: black;
         padding: 10px;
         text-align: center;
+        color: white;
         }
     </style>
     </head>
     <body>
-    <div id="header">
+    <div id="section">
         <h1>Welcome to my website</h1>
     </div>
-    <div id="main">
+    <div class="content">
         <p>Here is some content on my website.</p>
+        <img src="https://cdn.shopify.com/s/files/1/2081/1519/products/E-TYPE_1_Black.jpg?v=1671410539"/>
     </div>
-    <div id="footer">
+    <div id="portion">
         <p>Copyright &copy; 2023 My Name</p>
     </div>
     </body>
@@ -202,30 +212,39 @@
             &lt;head>
             &lt;title>Styled Divs Example&lt;/title>
             &lt;style>
-                #header {
-                    background-color: blue;
-                    padding: 10px;
-                    text-align: center;
-                }
-                #main {
-                    padding: 20px;
-                    background-color: <input type="text" id="yellow" class="droppable" ondrop="handleDrop(event)" ondragover="handleDragOver(event)" readonly>;
-                }
-                #footer {
-                    background-color: green;
-                    padding: 10px;
-                    text-align: <input type="text" id="center" class="droppable" ondrop="handleDrop(event)" ondragover="handleDragOver(event)" readonly>;
-                }
+            #<input type="text" id="section" class="droppable" ondrop="handleDrop(event)" ondragover="handleDragOver(event)" readonly> {
+                background-color: lightblue;
+                padding: 10px;
+                text-align: center;
+                color: brown;
+            }
+            img {
+                height: <input type="text" id="height" class="droppable" ondrop="handleDrop(event)" ondragover="handleDragOver(event)" readonly>;
+                width: <input type="text" id="width" class="droppable" ondrop="handleDrop(event)" ondragover="handleDragOver(event)" readonly>;
+            }
+            .content {
+                background-color: lightgray;
+                padding: 20px;
+                text-align: center;
+                font-family: <input type="text" id="sans" class="droppable" ondrop="handleDrop(event)" ondragover="handleDragOver(event)" readonly>;
+            }
+            #<input type="text" id="portion" class="droppable" ondrop="handleDrop(event)" ondragover="handleDragOver(event)" readonly> {
+                background-color: black;
+                padding: 10px;
+                text-align: center;
+                color: white;
+            }
             &lt;/style>
             &lt;/head>
             &lt;body>
-            &lt;div id="<input type="text" id="header" class="droppable" ondrop="handleDrop(event)" ondragover="handleDragOver(event)" readonly>">
+            &lt;div id="section">
                 &lt;h1>Welcome to my website&lt;/h1>
             &lt;/div>
-            &lt;div id="<input type="text" id="main" class="droppable" ondrop="handleDrop(event)" ondragover="handleDragOver(event)" readonly>">
-                &lt;p>Here is some content on my website.&lt;/p>
+            &lt;div <input type="text" id="class" class="droppable" ondrop="handleDrop(event)" ondragover="handleDragOver(event)" readonly>="content">
+                &lt;p>Here is some content on my website.&lt;/p&gt;
+                &lt;img src=&quot;https://cdn.shopify.com/s/files/1/2081/1519/products/E-TYPE_1_Black.jpg?v=1671410539&quot;/&gt;
             &lt;/div>
-            &lt;div id="<input type="text" id="footer" class="droppable" ondrop="handleDrop(event)" ondragover="handleDragOver(event)" readonly>">
+            &lt;div id="portion">
                 &lt;p>Copyright &copy; 2023 My Name&lt;/p>
             &lt;/div>
             &lt;/body>
@@ -234,12 +253,12 @@
     </pre>
     </div>
     <div class="col-md">
-        <div id="footer-id" class="draggable" data-target="footer" ondragstart="handleDragStart(event)">footer</div>
-        <div id="center-align" class="draggable" data-target="center" ondragstart="handleDragStart(event)">center</div>
-        <div id="header-id" class="draggable" data-target="header" ondragstart="handleDragStart(event)">header</div>
-        <div id="yellow-color" class="draggable" data-target="yellow" ondragstart="handleDragStart(event)">yellow</div>
-        <div id="main-id" class="draggable" data-target="main" ondragstart="handleDragStart(event)">main</div>
+        <div id="main-id" class="draggable" data-target="height" ondragstart="handleDragStart(event)">250px</div>
+        <div id="class-attr" class="draggable" data-target="class" ondragstart="handleDragStart(event)">class</div>
+        <div id="sans-font" class="draggable" data-target="sans" ondragstart="handleDragStart(event)">sans-serif</div>
+        <div id="yellow-color" class="draggable" data-target="portion" ondragstart="handleDragStart(event)">portion</div>
+        <div id="width-id" class="draggable" data-target="width" ondragstart="handleDragStart(event)">400px</div>
+        <div id="width-id" class="draggable" data-target="section" ondragstart="handleDragStart(event)">section</div>
     </div>
-    <a href="cssGame5.html">NEXT</a>
 </body>
 </html>
