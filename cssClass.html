@@ -102,7 +102,7 @@
         tag = workingCss.querySelector("#"+targetId);
         console.log(tag)
         tag.replaceWith(element.innerHTML);
-        new_css = document.getElementById("code").innerHTML;
+        new_css = document.getElementById("css").innerHTML;
         var iframe = document.getElementById("old-webpage");
         var head = iframe.contentDocument.getElementsByTagName("head")[0];
         var style = head.getElementsByTagName("style")[0];
@@ -176,9 +176,11 @@
               &lt;head&gt;
                 &lt;title&gt;Unstyled Example&lt;/title&gt;
                 &lt;style&gt;
+                <code id="css">
                   <input type="text" id="blue" class="droppable" ondrop="handleDrop(event)" ondragover="handleDragOver(event)" readonly> {
                     color: blue;
                   }
+                </code>
                 &lt;/style&gt;
               &lt;/head&gt;
               &lt;body&gt;
