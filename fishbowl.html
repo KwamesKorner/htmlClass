@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Biblical Characters Game</title>
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+  </head>
+  <body>
+    <h1>Biblical Characters Game</h1>
+    <div id="character"></div>
+    <button id="next-button" onclick="next()">Next</button>
+    <script>
+        // Define the list of biblical characters
+const characters = [
+    "Adam",
+    "Eve",
+    "Noah",
+    "Abraham",
+    "Isaac",
+    "Jacob",
+    "Joseph",
+    "Moses",
+    "Aaron",
+    "Joshua",
+    "Samson",
+    "David",
+    "Solomon",
+    "Isaiah",
+    "Jeremiah",
+    "Ezekiel",
+    "Daniel",
+    "Jonah",
+    "John the Baptist",
+    "Jesus",
+    "Mary",
+    "Peter",
+    "Paul",
+    "James",
+    "Judas"
+];
+  
+  // Initialize variables for tracking the current and previous characters
+  var currentCharacter = "";
+  var previousCharacters = [];
+  
+  // Define the next() function to randomly select a character and display it
+  function next() {
+    console.log("click!")
+        // Select a random character from the list
+        var index = Math.floor(Math.random() * characters.length);
+        var character = characters[index];
+        document.querySelector("#character").innerHTML = character;
+        
+        // Check if the character has already been displayed
+        if (previousCharacters.includes(character)) {
+        // If it has, select another character
+        next();
+        return;
+        }
+        
+        // Add the character to the list of previous characters
+        previousCharacters.push(character);
+    }
+
+    </script>
+
+  </body>
+</html>

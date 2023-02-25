@@ -1,0 +1,32 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+  }
+  #character {
+    font-size: 5em;
+    margin: 2em;
+  }
+  #next-button {
+    font-size: 1.5em;
+    padding: 1em 2em;
+    border: none;
+    background-color: #008CBA;
+    color: white;
+    border-radius: 5px;
+  }
+  #next-button:hover {
+    background-color: #006E8E;
+    cursor: pointer;
+  }
+  @media only screen and (max-width: 768px) {
+    /* Responsive design for mobile devices */
+    #character {
+      font-size: 3em;
+      margin: 1em;
+    }
+    #next-button {
+      font-size: 1em;
+      padding: 0.5em 1em;
+    }
+  }
+  
